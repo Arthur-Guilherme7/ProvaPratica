@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Cadastro de Livros</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body class="bg-gray-100 min-h-screen">
+
+  <!-- Menu de Navegação -->
+  <nav class="bg-gray-800 p-4">
+    <div class="container mx-auto flex justify-between items-center">
+      <a class="text-white font-bold text-xl" href="#">Biblioteca</a>
+      <div>
+        <a class="text-gray-300 hover:text-white mx-2" href="#">Início</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Formulário de Cadastro -->
+  <div class="container mx-auto mt-8 p-4 bg-white rounded shadow-md">
+    <h2 class="text-2xl font-bold mb-4">Cadastro de Livro</h2>
+    <form id="formCadastroLivro" onsubmit="salvarLivro(event)" class="space-y-4">
+
+      <input type="hidden" id="livroId" />
+
+      <div>
+        <label for="titulo" class="block font-bold mb-1">Título</label>
+        <input type="text" id="titulo" class="w-full border rounded px-3 py-2" required />
+      </div>
+
+      <div>
+        <label for="genero" class="block font-bold mb-1">Gênero</label>
+        <input type="text" id="genero" class="w-full border rounded px-3 py-2" required />
+      </div>
+
+      <div>
+        <label for="dataCadastro" class="block font-bold mb-1">Data de Cadastro</label>
+        <input type="date" id="dataCadastro" class="w-full border rounded px-3 py-2" required />
+      </div>
+
+      <div>
+        <label for="status" class="block font-bold mb-1">Status</label>
+        <select id="status" class="w-full border rounded px-3 py-2" required>
+          <option value="">Selecione...</option>
+          <option value="Disponível">Disponível</option>
+          <option value="Emprestado">Emprestado</option>
+        </select>
+      </div>
+
+      <div>
+        <label for="bibliotecario" class="block font-bold mb-1">Bibliotecário</label>
+        <select id="bibliotecario" class="w-full border rounded px-3 py-2" required>
+          <option value="">Selecione um bibliotecário</option>
+          <!-- Opções serão carregadas dinamicamente -->
+        </select>
+      </div>
+
+      <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
+        Salvar
+      </button>
+      <button type="button" onclick="resetarForm()" class="ml-2 bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600">
+        Cancelar
+      </button>
+    </form>
+  </div>
+
+  <!-- Tabela de Livros -->
+  <div class="container mx-auto mt-8 p-4 bg-white rounded shadow-md">
+    <h2 class="text-2xl font-bold mb-4">Lista de Livros</h2>
+    <table class="w-full table-auto border-collapse border border-gray-300">
+      <thead class="bg-gray-200">
+        <tr>
+          <th class="border border-gray-300 px-4 py-2">ID</th>
+          <th class="border border-gray-300 px-4 py-2">Título</th>
+          <th class="border border-gray-300 px-4 py-2">Gênero</th>
+          <th class="border border-gray-300 px-4 py-2">Data Cadastro</th>
+          <th class="border border-gray-300 px-4 py-2">Status</th>
+          <th class="border border-gray-300 px-4 py-2">Bibliotecário</th>
+          <th class="border border-gray-300 px-4 py-2">Ações</th>
+        </tr>
+      </thead>
+      <tbody id="tabelaLivrosCorpo">
+        <!-- Linhas dinâmicas -->
+      </tbody>
+    </table>
+  </div>
+
+  <script src="./assets/js/livros.js"></script>
+
+</body>
+</html>
