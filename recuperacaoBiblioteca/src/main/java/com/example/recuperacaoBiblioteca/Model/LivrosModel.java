@@ -7,22 +7,24 @@ import java.time.LocalDate;
 
 @Entity
 public class LivrosModel {
-    @Id
+
+    @Id // Indica que o campo abaixo é a chave primária
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "id_bibliotecario",referencedColumnName = "id")
+    @ManyToOne // Muitos livros podem estar ligados a um único bibliotecário
+    @JoinColumn(name = "id_bibliotecario", referencedColumnName = "id") // Nome da coluna estrangeira que liga com a tabela de bibliotecário
     private BibliotecarioModel bibliotecario;
 
     private String titulo;
-
     private String genero;
 
     private String status = "Disponivel";
 
-    @JsonFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd") // Define o formato da data no JSON (ex: 2025-06-15)
     private LocalDate data_cadastro;
+
+
 
     public Long getId() {
         return id;

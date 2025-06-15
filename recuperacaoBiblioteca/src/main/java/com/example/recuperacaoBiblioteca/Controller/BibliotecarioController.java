@@ -13,35 +13,36 @@ import java.util.List;
 public class BibliotecarioController {
 
     @Autowired
-     BibliotecarioService service;
+    BibliotecarioService service;
 
     @GetMapping
-    public List<BibliotecarioModel>listarTodos(){
+    public List<BibliotecarioModel> listarTodos() {
         return service.ListarTodos();
     }
 
     @PostMapping
-    public BibliotecarioModel salvar(@RequestBody BibliotecarioModel bibliotecarioModel){
+    public BibliotecarioModel salvar(@RequestBody BibliotecarioModel bibliotecarioModel) {
         return service.Salvar(bibliotecarioModel);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<BibliotecarioModel> atualizar(@PathVariable Long id, @RequestBody BibliotecarioModel bibliotecarioModel){
+    public ResponseEntity<BibliotecarioModel> atualizar(@PathVariable Long id, @RequestBody BibliotecarioModel bibliotecarioModel) {
         try {
             BibliotecarioModel bibliotecarioM = service.Atualizar(id, bibliotecarioModel);
             return ResponseEntity.ok(bibliotecarioM);
-        }catch (RuntimeException e){
-            return ResponseEntity.notFound().build();
-        }
-    }
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deletar(@PathVariable Long id){
-        try {
-            service.Deletar(id);
-            return ResponseEntity.noContent().build();
-        }catch (RuntimeException e){
+        } catch (RuntimeException e) {
+            // Retorna 404 caso o ID não seja encontrado
             return ResponseEntity.notFound().build();
         }
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deletar(@PathVariable Long id) {
+        try {
+            service.Deletar(id);
+            return ResponseEntity.noContent().build(); // 204 No Content
+        } catch (RuntimeException e) {
+            return ResponseEntity.notFound().build(); // 404 Not Found
+        }
+    }
 }

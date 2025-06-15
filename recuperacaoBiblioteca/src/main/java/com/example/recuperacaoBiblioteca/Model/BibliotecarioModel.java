@@ -5,16 +5,16 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
-@Entity
+@Entity // Indica que esta classe será mapeada para uma tabela no banco de dados
 public class BibliotecarioModel {
-    @Id
 
+    @Id // Define que o campo abaixo é a chave primária da tabela
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String nome;
-
     private String email;
+
 
     public Long getId() {
         return id;

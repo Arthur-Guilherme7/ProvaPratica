@@ -21,17 +21,20 @@ public class LivrosService {
     public List<LivrosModel> ListarTodos(){
         return repository.findAll();
     }
+
     public LivrosModel BuscarPorId(Long id) {
+        // Retorna Optional, e se não existir, retorna null (não lança exceção)
         Optional<LivrosModel> livro = repository.findById(id);
         return livro.orElse(null);
     }
 
     public LivrosModel Atualizar(Long id, LivrosModel livrosModel){
         LivrosModel livro = repository.findById(id)
+                // Aqui sim lança exceção se não encontrar
                 .orElseThrow(() -> new RuntimeException("Livro não encontrado"));
 
+        // Atualiza apenas o bibliotecário vinculado ao livro
         livro.setBibliotecario(livrosModel.getBibliotecario());
-
 
         return repository.save(livro);
     }

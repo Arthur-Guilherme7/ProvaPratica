@@ -23,8 +23,10 @@ public class BibliotecarioService {
 
     public BibliotecarioModel Atualizar(Long id, BibliotecarioModel bibliotecarioModel){
         BibliotecarioModel bibliotecario = repository.findById(id)
+                // Lança exceção se o bibliotecário não for encontrado
                 .orElseThrow(() -> new RuntimeException("Bibliotecario não encontrado"));
 
+        // Atualiza os campos necessários
         bibliotecario.setEmail(bibliotecarioModel.getEmail());
         bibliotecario.setNome(bibliotecarioModel.getNome());
 

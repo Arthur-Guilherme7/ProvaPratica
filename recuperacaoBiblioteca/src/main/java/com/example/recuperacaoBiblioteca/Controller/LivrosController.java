@@ -27,6 +27,7 @@ public class LivrosController {
         if (livro != null) {
             return ResponseEntity.ok(livro);
         }
+        // Retorna 404 se não encontrado (sem lançar exceção aqui)
         return ResponseEntity.notFound().build();
     }
 
@@ -38,10 +39,10 @@ public class LivrosController {
     @PutMapping("/{id}")
     public ResponseEntity<LivrosModel> atualizar(@PathVariable Long id, @RequestBody LivrosModel livrosModel) {
         try {
-            LivrosModel LivrosM = service.Atualizar(id, livrosModel);
-            return ResponseEntity.ok(LivrosM);
+            LivrosModel livrosM = service.Atualizar(id, livrosModel);
+            return ResponseEntity.ok(livrosM);
         } catch (RuntimeException e) {
-            return ResponseEntity.notFound().build();
+            return ResponseEntity.notFound().build(); // 404 caso o livro não exista
         }
     }
 
@@ -49,9 +50,9 @@ public class LivrosController {
     public ResponseEntity<Void> deletar(@PathVariable Long id) {
         try {
             service.Deletar(id);
-            return ResponseEntity.noContent().build();
+            return ResponseEntity.noContent().build(); // 204 No Content
         } catch (RuntimeException e) {
-            return ResponseEntity.notFound().build();
+            return ResponseEntity.notFound().build(); // 404 Not Found
         }
     }
 }
