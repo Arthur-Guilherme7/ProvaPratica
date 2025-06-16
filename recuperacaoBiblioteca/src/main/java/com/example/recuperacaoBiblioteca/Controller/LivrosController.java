@@ -27,7 +27,7 @@ public class LivrosController {
         if (livro != null) {
             return ResponseEntity.ok(livro);
         }
-        // Retorna 404 se não encontrado (sem lançar exceção aqui)
+        
         return ResponseEntity.notFound().build();
     }
 
@@ -42,7 +42,7 @@ public class LivrosController {
             LivrosModel livrosM = service.Atualizar(id, livrosModel);
             return ResponseEntity.ok(livrosM);
         } catch (RuntimeException e) {
-            return ResponseEntity.notFound().build(); // 404 caso o livro não exista
+            return ResponseEntity.notFound().build(); 
         }
     }
 
